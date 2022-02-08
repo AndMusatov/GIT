@@ -28,17 +28,27 @@ namespace Luxoft
 
             for (int i = min; i < max + 1; i++)
             {
-                var numbers = i.ToString().ToCharArray();
-                var intNumbers = Array.ConvertAll(numbers, c => (int)Char.GetNumericValue(c));
-                int intermediateSum = intNumbers.Sum();
+                var numbers = SplitNumber(i);
+                int intermediateSum = numbers.Sum();
                 if (intermediateSum == targetlSum)
-                {
                     result.Add(i);
-                }
             }
 
             return result;
-        } 
+        }
+
+        public static List<int> SplitNumber(int number)
+        {
+            List<int> digitsList = new List<int>();
+
+            while (number > 0)
+            {
+                digitsList.Add(number % 10);
+                number /= 10;
+            }
+
+            return digitsList;
+        }
 
         private static void ParametrsCheck(ref int min, ref int max, ref int targetlSum)
         {
